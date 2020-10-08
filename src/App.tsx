@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import meteors from "./assets/meteors.json";
 import MeteorsSearcher from "./utils/MeteorsSearcher";
+import moment from "moment";
+
+window.moment = moment;
 
 function App() {
     console.log(new MeteorsSearcher(meteors));

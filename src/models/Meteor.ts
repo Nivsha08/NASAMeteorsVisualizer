@@ -1,20 +1,21 @@
 import {MeteorLocation, MeteorMetadata, MeteorProperties, Recognizer} from "../types/meteors";
+import DateUtils from "../utils/DateUtils";
 
 class Meteor {
 
-    name?: string;
-    mass?: string | number;
-    fall?: string;
-    year?: string;
+    name: null | string;
+    mass: null | string | number;
+    fall: null | string;
+    year: null | number;
     location: null | MeteorLocation;
     recognizer: Recognizer;
     metadata: null | MeteorMetadata;
 
     constructor(props: MeteorProperties) {
-        this.name = props.name;
-        this.mass = props.mass;
-        this.fall = props.fall;
-        this.year = props.year;
+        this.name = (props.name) ? props.name : null;
+        this.mass = (props.mass) ? props.mass : null;
+        this.fall = (props.fall) ? props.fall : null;
+        this.year = (props.year) ? this.parseYear(props.year) : null;
         this.metadata = this.parseMetadata(props);
         this.location = this.parseLocation(props);
         this.recognizer = this.parseRecognizer(props);
@@ -22,6 +23,10 @@ class Meteor {
 
     isLocationKnown(): boolean {
         return (!this.location?.coordinates.lat || !this.location?.coordinates.lng);
+    }
+
+    private parseYear(date: string): number {
+        return DateUtils.get(DateUtils.parse(date), "year");
     }
 
     private parseMetadata(props: MeteorProperties): MeteorMetadata {

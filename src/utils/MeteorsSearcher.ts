@@ -7,11 +7,12 @@ class MeteorsSearcher {
 
     constructor(data: MeteorProperties[]) {
         this.meteors = data.map(
-            (item: MeteorProperties): Meteor => {
-                console.log(item);
-                return new Meteor(item);
-            }
+            (item: MeteorProperties): Meteor => new Meteor(item)
         );
+    }
+
+    filterByYear(year: string | number): Meteor[] {
+        return [];
     }
 
 }
