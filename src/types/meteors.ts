@@ -1,20 +1,25 @@
-type Latitude = number;
-type Longitude = number;
+export type Latitude = number | string;
+export type Longitude = number | string;
 
-export interface MeteorGeolocation {
-    type: "Point";
+export interface Recognizer {
+    class: string;
     coordinates: [Latitude, Longitude];
 }
 
-export interface Meteor {
+export interface MeteorGeolocation {
+    type: string;
+    coordinates: [Latitude, Longitude];
+}
+
+export interface MeteorProperties {
     name: string;
     id: string;
-    nametype: "Valid" | "Invalid";
+    nametype: string;
     recclass: string;
     mass: string | number;
-    fall: "Fell" | "Found";
+    fall: string;
     year: string;
     reclat: Latitude;
     reclong: Longitude;
-    geolocation: MeteorGeolocation;
+    geolocation?: MeteorGeolocation;
 }

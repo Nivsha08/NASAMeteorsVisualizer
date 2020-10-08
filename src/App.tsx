@@ -2,10 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import meteors from "./assets/meteors.json";
-import {Meteor} from "./types/meteors";
+import MeteorsSearcher from "./utils/MeteorsSearcher";
 
 function App() {
-    console.log(meteors.filter(m => m.nametype !== "Valid"));
+    // console.log(new MeteorsSearcher(meteors));
     return (
         <div className="App">
             <header className="App-header">
