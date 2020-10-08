@@ -5,7 +5,7 @@ import meteors from "./assets/meteors.json";
 import MeteorsSearcher from "./utils/MeteorsSearcher";
 
 function App() {
-    // console.log(new MeteorsSearcher(meteors));
+    console.log(new MeteorsSearcher(meteors));
     return (
         <div className="App">
             <header className="App-header">

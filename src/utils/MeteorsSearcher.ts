@@ -7,9 +7,11 @@ class MeteorsSearcher {
 
     constructor(data: MeteorProperties[]) {
         this.meteors = data.map(
-            (item: MeteorProperties): Meteor => new Meteor(item)
+            (item: MeteorProperties): Meteor => {
+                console.log(item);
+                return new Meteor(item);
+            }
         );
-        console.log(this.meteors);
     }
 
 }
