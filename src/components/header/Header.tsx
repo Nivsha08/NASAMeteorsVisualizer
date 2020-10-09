@@ -1,5 +1,5 @@
 import React from "react";
-import "./header.scss";
+import "./Header.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMeteor} from "@fortawesome/free-solid-svg-icons";
 
