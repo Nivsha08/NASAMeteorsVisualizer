@@ -1,13 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import meteors from "./assets/meteors.json";
-import MeteorsSearcher from "./utils/MeteorsSearcher";
-import moment from "moment";
+import React from "react";
+import logo from "../../assets/logo.svg";
+import "./App.css";
+import meteors from "../../assets/meteors.json";
+import MeteorsSearcher from "../../utils/MeteorsSearcher";
 
-window.moment = moment;
-
-function App() {
+const App = () => {
     console.log(new MeteorsSearcher(meteors));
     return (
         <div className="App">
@@ -27,6 +24,6 @@ function App() {
             </header>
         </div>
     );
-}
+};
 
 export default App;
