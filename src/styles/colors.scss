@@ -1,0 +1,41 @@
+$white: #ffffff;
+$black: #000000;
+
+$primary: #1d3752;
+$success: #069e57;
+$warning: #f9a302;
+$danger: #c61743;
+$info: #185add;
+
+$palette: (
+        primary: $primary,
+        success: $success,
+        warning: $warning,
+        danger: $danger,
+        info: $info,
+        black: $black
+);
+
+$weights: (
+        100 : 50%,
+        200 : 30%,
+        300 : 20%,
+        400 : 10%,
+        500 : 0,
+        600 : 5%,
+        700 : 10%,
+        800 : 15%,
+        900 : 20%
+);
+
+@function get-color-weight($color, $weight) {
+    @if $weight > 900 or $weight < 100 {
+        @return $color;
+    } @else if $weight == 500 {
+        @return $color;
+    } @else if $weight < 500 {
+        @return lighten($color, map-get($weights, $weight));
+    } @else {
+        @return darken($color, map-get($weights, $weight));
+    }
+}
