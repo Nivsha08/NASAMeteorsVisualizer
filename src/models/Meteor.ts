@@ -21,8 +21,16 @@ class Meteor {
         this.recognizer = this.parseRecognizer(props);
     }
 
-    isLocationKnown(): boolean {
+    knownLocation(): boolean {
         return (!this.location?.coordinates.lat || !this.location?.coordinates.lng);
+    }
+
+    knownYear(): boolean {
+        return (this.year != null);
+    }
+
+    knownMass(): boolean {
+        return (this.mass != null);
     }
 
     private parseYear(date: string): number {

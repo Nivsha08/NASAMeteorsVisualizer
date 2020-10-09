@@ -2,16 +2,10 @@ import moment, {Moment, unitOfTime} from "moment";
 
 class DateParseError extends Error {
     readonly name: string = "DateParseError";
-    constructor(message: string) {
-        super(message);
-    }
 }
 
 class DateOperationError extends Error {
     readonly name: string = "DateOperationError";
-    constructor(message: string) {
-        super(message);
-    }
 }
 
 class DateUtils {
