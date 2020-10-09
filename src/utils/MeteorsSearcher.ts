@@ -44,14 +44,14 @@ class MeteorsSearcher {
         return this;
     }
 
-    
+    // todo: implement no-results-fallback logic
 
     result(): Meteor[] {
         return this.meteors;
     }
 
     reset(): void {
-        this.meteors = this.initialMeteors;
+        this.meteors = ArrayUtils.clone(this.initialMeteors);
     }
 
 }
