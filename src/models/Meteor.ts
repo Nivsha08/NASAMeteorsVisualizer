@@ -22,7 +22,7 @@ class Meteor {
     }
 
     knownLocation(): boolean {
-        return (!this.location?.coordinates.lat || !this.location?.coordinates.lng);
+        return (this.location?.coordinates.lat != null && this.location?.coordinates.lng != null);
     }
 
     knownYear(): boolean {
@@ -31,6 +31,10 @@ class Meteor {
 
     knownMass(): boolean {
         return (this.mass != null);
+    }
+
+    isValid(): boolean {
+        return (this.knownLocation() && this.knownYear() && this.knownMass());
     }
 
     private parseYear(date: string): number {

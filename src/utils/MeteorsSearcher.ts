@@ -9,7 +9,8 @@ class MeteorsSearcher {
 
     constructor(data: MeteorProperties[] | Meteor[]) {
         const parsedData: Meteor[] = this.parseData(data);
-        this.initialMeteors = ArrayUtils.sortBy(parsedData, "year");
+        const validMeteors: Meteor[] = this.removeInvalidMeteors(parsedData);
+        this.initialMeteors = ArrayUtils.sortBy(validMeteors, "year");
         this.meteors = ArrayUtils.clone(this.initialMeteors);
     }
 
@@ -24,6 +25,10 @@ class MeteorsSearcher {
             return (data as MeteorProperties[])
                 .map((item: MeteorProperties): Meteor => new Meteor(item));
         }
+    }
+
+    private removeInvalidMeteors(data: Meteor[]): Meteor[] {
+        return data.filter((m: Meteor) => m.isValid());
     }
 
     filterByYear(year: string | number): MeteorsSearcher {
@@ -46,14 +51,13 @@ class MeteorsSearcher {
 
     // todo: implement no-results-fallback logic
 
-    result(): Meteor[] {
-        return this.meteors;
-    }
-
     reset(): void {
         this.meteors = ArrayUtils.clone(this.initialMeteors);
     }
 
+    get result(): Meteor[] { return this.meteors; }
+    get minYear(): number { return ArrayUtils.findMin(this.meteors.map(m => m.year as number)); }
+    get maxYear(): number { return ArrayUtils.findMax(this.meteors.map(m => m.year as number)); }
 }
 
 export default MeteorsSearcher;

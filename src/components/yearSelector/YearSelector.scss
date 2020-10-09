@@ -1,0 +1,33 @@
+@import "../../styles/colors";
+
+.year-selector-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.instruction {
+    color: $white;
+    font-size: 1rem;
+    margin: .5rem 0;
+}
+
+.input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .year-input {
+        width: 50%;
+        align-self: center;
+        margin: 1rem 0;
+        border-radius: 0;
+    }
+    .proceed-button {
+        color: $white;
+        background-color: get-color-weight($primary, 600);
+        &:hover {
+            background-color: get-color-weight($primary, 500);
+        }
+    }
+}
