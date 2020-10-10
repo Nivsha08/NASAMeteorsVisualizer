@@ -20,4 +20,10 @@
         margin: .5rem 0;
         font-size: 1rem;
     }
+    .details-button {
+        font-size: 1rem;
+        color: transparentize($white, .3);
+        text-decoration: underline;
+        text-decoration-style: dotted;
+    }
 }

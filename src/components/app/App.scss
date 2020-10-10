@@ -8,6 +8,7 @@
     align-items: center;
     background-color: transparent;
     position: relative;
+
     &::before {
         content: "";
         position: absolute;
@@ -16,6 +17,10 @@
         top: 0;
         left: 0;
         z-index: -2;
-        background-color: get-color-weight($primary, 700);
+        background: linear-gradient(
+                        to bottom,
+                        get-color-weight($primary, 600),
+                        get-color-weight($primary, 900)
+        );
     }
 }

@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: space-around;
     .apply-button {
-        flex-basis: 45%;
+        flex-basis: 65%;
         color: $white;
         background-color: get-color-weight($primary, 600);
         &:hover {
@@ -24,7 +24,7 @@
         }
     }
     .reset-button {
-        flex-basis: 45%;
+        flex-basis: 25%;
         color: $white;
         border-color: get-color-weight($danger, 200);
         background-color: get-color-weight($danger, 300);

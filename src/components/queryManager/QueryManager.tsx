@@ -92,10 +92,10 @@ const QueryManager = (props: QueryManagerProps) => {
             <MassSelector value={mass} setValue={setMass}
                           maxMass={props.searcher.maxMass}/>
             <div className="buttons-wrapper">
-                <Button className="reset-button" size={"large"} type={"ghost"}
-                        onClick={resetQuery}>Reset</Button>
                 <Button className="apply-button" size={"large"} type={"ghost"}
                         onClick={updateQuery}>Apply query</Button>
+                <Button className="reset-button" size={"large"} type={"ghost"}
+                    onClick={resetQuery}>Reset</Button>
             </div>
             {
                 summaryVisible ?
