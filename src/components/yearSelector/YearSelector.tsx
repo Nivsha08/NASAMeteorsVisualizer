@@ -1,6 +1,6 @@
 import React from "react";
 import "./YearSelector.scss";
-import {Button, Input, Slider} from "antd";
+import {Button, InputNumber, Slider} from "antd";
 import {ScheduleTwoTone, ArrowRightOutlined} from "@ant-design/icons"
 
 interface YearSelectorProps {
@@ -24,8 +24,8 @@ const YearSelector = (props: YearSelectorProps) => {
         [props.maxYear]: {style, label: props.maxYear}
     };
 
-    const handleValue = (value: string): void => {
-        if (value) props.setValue(Number.parseInt(value));
+    const handleValue = (value: number): void => {
+        if (value) props.setValue(value);
         else props.setValue(props.minYear);
     };
 
@@ -39,15 +39,13 @@ const YearSelector = (props: YearSelectorProps) => {
                     onChange={(e: number) => props.setValue(e)}
                     onAfterChange={props.onProceed}/>
             <div className="input-wrapper">
-                <Input className="year-input"
+                <InputNumber className="year-input"
                        type={"number"}
                        size={"large"}
-                       allowClear
-                       prefix={<ScheduleTwoTone/>}
                        min={props.minYear}
                        max={props.maxYear}
                        value={props.value}
-                       onChange={e => handleValue(e.target.value)}
+                       onChange={e => handleValue(e as number)}
                        onPressEnter={props.onProceed}/>
                 <Button className="proceed-button"
                         type={"text"}
@@ -56,7 +54,6 @@ const YearSelector = (props: YearSelectorProps) => {
                     {<ArrowRightOutlined/>}
                 </Button>
             </div>
-
         </div>
     )
 };
