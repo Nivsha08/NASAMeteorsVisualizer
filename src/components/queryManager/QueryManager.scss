@@ -1,0 +1,28 @@
+@import "../../styles/colors";
+
+.buttons-wrapper {
+    padding: .5rem 0;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    .apply-button {
+        flex-basis: 45%;
+        color: $white;
+        background-color: get-color-weight($primary, 600);
+        &:hover {
+            background-color: get-color-weight($primary, 500);
+        }
+    }
+    .reset-button {
+        flex-basis: 45%;
+        color: $white;
+        border-color: get-color-weight($danger, 200);
+        background-color: get-color-weight($danger, 300);
+        &:hover {
+            border-color: get-color-weight($danger, 300);
+            background-color: get-color-weight($danger, 400);
+        }
+    }
+}

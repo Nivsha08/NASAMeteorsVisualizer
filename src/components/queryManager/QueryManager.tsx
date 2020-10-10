@@ -1,10 +1,12 @@
 import React, {useState} from "react";
+import "./QueryManager.scss";
 import {MeteorProperties} from "../../types/meteors";
 import MeteorsSearcher from "../../utils/MeteorsSearcher";
 import {YearSelector} from "../yearSelector";
 import {ResultSummary} from "../resultSummary";
 import {MassSelector} from "../massSelector";
 import {PromptMessage} from "../promptMessage";
+import {Button} from "antd";
 
 interface QueryManagerProps {
     dataset: MeteorProperties[];
@@ -22,7 +24,7 @@ interface MessageProps {
 
 const QueryManager = (props: QueryManagerProps) => {
 
-    const [year, setYear] = useState<number>(1000);
+    const [year, setYear] = useState<number>(0);
     const [mass, setMass] = useState<number>(0);
     const [message, setMessage] = useState<MessageProps>({visible: false});
 
@@ -70,10 +72,18 @@ const QueryManager = (props: QueryManagerProps) => {
     };
 
     const updateQuery = (): void => {
-        setMessage({ visible: false });
+        setMessage({visible: false});
         props.searcher.reset();
         props.searcher.filterByYear(year).filterByMinimalMass(mass);
         validateQueryResults();
+        props.onQuery();
+    };
+
+    const resetQuery = (): void => {
+        setMessage({visible: false});
+        props.searcher.reset();
+        setYear(0);
+        setMass(0);
         props.onQuery();
     };
 
@@ -86,11 +96,17 @@ const QueryManager = (props: QueryManagerProps) => {
             <MassSelector value={mass} setValue={setMass}
                           maxMass={props.searcher.maxMass}
                           onProceed={updateQuery}/>
+            <div className="buttons-wrapper">
+                <Button className="reset-button" size={"large"} type={"ghost"}
+                        onClick={resetQuery}>Reset</Button>
+                <Button className="apply-button" size={"large"} type={"ghost"}
+                        onClick={updateQuery}>Apply query</Button>
+            </div>
             <ResultSummary meteors={props.searcher.result} key={props.queryKey}/>
             <PromptMessage visible={message.visible}
                            message={message.text}
                            type={message.type}
-                           onClose={() => setMessage({visible: false})} />
+                           onClose={() => setMessage({visible: false})}/>
         </>
     )
 };

@@ -1,13 +1,9 @@
 import React from "react";
 import "./FallingMeteors.scss";
 
-interface FallingMeteorsProps {
-    amount: number;
-}
-
-const FallingMeteors = (props: FallingMeteorsProps) => {
-    const multiplyFactor = 3;
-    const indicesArray = Array.from({length: props.amount * multiplyFactor}, (_, i) => i);
+const FallingMeteors = () => {
+    const MAX_METEORS = 15;
+    const indicesArray = Array.from({length: MAX_METEORS}, (_, i) => i);
     return (
         <div className="falling-meteors-wrapper">
             {

@@ -41,8 +41,7 @@ const App = () => {
                                       updateSearcher={setSearcher}
                                       onQuery={updateQueryKey}
                                       queryKey={queryKey}/>
-                        <FallingMeteors amount={searcher.result.length}
-                                        key={queryKey}/>
+                        <FallingMeteors />
                     </>
                     : null
             }

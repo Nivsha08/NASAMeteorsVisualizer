@@ -1,6 +1,6 @@
 import React from "react";
 import "./YearSelector.scss";
-import {Button, InputNumber, Slider} from "antd";
+import {InputNumber, Slider} from "antd";
 
 interface YearSelectorProps {
     value: number;
@@ -40,19 +40,12 @@ const YearSelector = (props: YearSelectorProps) => {
                     onAfterChange={props.onProceed}/>
             <div className="input-wrapper">
                 <InputNumber className="year-input"
-                             type={"number"}
                              size={"large"}
                              min={props.minYear}
                              max={props.maxYear}
+                             placeholder={"CHOOSE YEAR TO INVESTIGATE"}
                              value={props.value}
-                             onChange={e => handleValue(e as number)}
-                             onPressEnter={props.onProceed}/>
-                <Button className="proceed-button"
-                        type={"text"}
-                        size={"large"}
-                        onClick={props.onProceed}>
-                    Apply
-                </Button>
+                             onChange={e => handleValue(e as number)}/>
             </div>
         </div>
     )

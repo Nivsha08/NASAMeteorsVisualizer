@@ -1,6 +1,6 @@
 import React from "react";
 import "./MassSelector.scss";
-import {Button, InputNumber} from "antd";
+import {InputNumber} from "antd";
 
 interface MassSelectorProps {
     value: number;
@@ -21,19 +21,12 @@ const MassSelector = (props: MassSelectorProps) => {
             <span className={"instruction"}>Go on and choose a minimal meteor mass, max mass: {props.maxMass}</span>
             <div className="input-wrapper">
                 <InputNumber className={"mass-input"}
-                             type={"text"}
+                             value={props.value}
                              min={0}
                              max={props.maxMass}
                              placeholder={"CHOOSE MINIMAL MASS"}
                              size={"large"}
-                             onChange={e => handleValue(e as number)}
-                             onPressEnter={props.onProceed}/>
-                <Button className="proceed-button"
-                        type={"text"}
-                        size={"large"}
-                        onClick={props.onProceed}>
-                    Apply
-                </Button>
+                             onChange={e => handleValue(e as number)}/>
             </div>
         </div>
     );
