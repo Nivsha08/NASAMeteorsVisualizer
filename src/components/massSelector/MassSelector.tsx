@@ -5,6 +5,7 @@ import {Button, InputNumber} from "antd";
 interface MassSelectorProps {
     value: number;
     setValue: (value: number) => void;
+    maxMass: number;
     onProceed: () => void;
 }
 
@@ -17,11 +18,12 @@ const MassSelector = (props: MassSelectorProps) => {
 
     return (
         <div className="mass-selector-wrapper">
-            <span className={"instruction"}>Go on and choose a minimal meteor mass</span>
+            <span className={"instruction"}>Go on and choose a minimal meteor mass, max mass: {props.maxMass}</span>
             <div className="input-wrapper">
                 <InputNumber className={"mass-input"}
                              type={"text"}
                              min={0}
+                             max={props.maxMass}
                              placeholder={"CHOOSE MINIMAL MASS"}
                              size={"large"}
                              onChange={e => handleValue(e as number)}

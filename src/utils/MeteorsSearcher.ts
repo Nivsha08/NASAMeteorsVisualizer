@@ -17,11 +17,9 @@ class MeteorsSearcher {
     private parseData(data: MeteorProperties[] | Meteor[]): Meteor[] {
         if (data.length === 0) {
             return [];
-        }
-        else if (data[0] instanceof Meteor) {
+        } else if (data[0] instanceof Meteor) {
             return data as Meteor[];
-        }
-        else {
+        } else {
             return (data as MeteorProperties[])
                 .map((item: MeteorProperties): Meteor => new Meteor(item));
         }
@@ -55,9 +53,25 @@ class MeteorsSearcher {
         this.meteors = ArrayUtils.clone(this.initialMeteors);
     }
 
-    get result(): Meteor[] { return this.meteors; }
-    get minYear(): number { return ArrayUtils.findMin(this.initialMeteors.map(m => m.year as number)); }
-    get maxYear(): number { return ArrayUtils.findMax(this.initialMeteors.map(m => m.year as number)); }
+    get result(): Meteor[] {
+        return this.meteors;
+    }
+
+    get emptyResult(): boolean {
+        return (this.result.length === 0);
+    }
+
+    get minYear(): number {
+        return ArrayUtils.findMin(this.initialMeteors.map(m => m.year as number));
+    }
+
+    get maxYear(): number {
+        return ArrayUtils.findMax(this.initialMeteors.map(m => m.year as number));
+    }
+
+    get maxMass(): number {
+        return ArrayUtils.findMax(this.initialMeteors.map(m => Number.parseInt(m.mass as string)));
+    }
 }
 
 export default MeteorsSearcher;
