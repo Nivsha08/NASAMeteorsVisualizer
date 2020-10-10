@@ -6,6 +6,7 @@ import {QueryManager} from "../queryManager";
 import {MeteorProperties} from "../../types/meteors";
 import MeteorsSearcher from "../../utils/MeteorsSearcher";
 import {FallingMeteors} from "../fallingMeteors";
+import {Map} from "../map";
 
 const fetchDataset = async () => mockDataset;
 
@@ -48,11 +49,7 @@ const App = () => {
                                       detailsVisible={detailsView}
                                       toggleDetails={toggleDetailsView}
                                       queryKey={queryKey}/>
-                        {
-                                <div className={`map-wrapper ${detailsView ? "visible" : "dismissed"}`}>
-                                    {/*<span style={{color: "white"}}>map view!</span>*/}
-                                </div>
-                        }
+                        <Map expanded={detailsView} />
                         <FallingMeteors/>
                     </div>
                     : null

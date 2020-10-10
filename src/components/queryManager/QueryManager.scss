@@ -8,22 +8,6 @@
     transition: flex-basis 1s 0s ease-out;
 }
 
-.map-wrapper {
-    transition: flex-basis 1s 0s ease-out;
-    //border: 1px solid red;
-    border-radius: 2rem;
-
-    &.visible {
-        flex-basis: 50%;
-        animation: fadeInUp 1s;
-    }
-
-    &.dismissed {
-        flex-basis: 0;
-        animation: fadeOutDown 1s;
-    }
-}
-
 .notification {
     background-color: transparentize(get-color-weight($primary, 500), .5);
 
