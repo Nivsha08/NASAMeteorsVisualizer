@@ -6,6 +6,7 @@
     align-items: center;
     animation: fadeIn 1.5s;
     margin: 1rem 0;
+
     .amount-summary {
         margin: .5rem 0;
         color: get-color-weight($primary, 400);
@@ -20,10 +21,9 @@
         margin: .5rem 0;
         font-size: 1rem;
     }
+
     .details-button {
         font-size: 1rem;
         color: transparentize($white, .3);
-        text-decoration: underline;
-        text-decoration-style: dotted;
     }
 }

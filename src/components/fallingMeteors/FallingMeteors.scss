@@ -40,8 +40,8 @@ $MAX_METEORS: 15;
     .meteor-#{$i} {
         animation-name: meteor-#{$i}-animation;
         animation-delay: $delay;
-        animation-duration: random(6) + 4s;
-        animation-iteration-count: 3;
+        animation-duration: random(6) + 6s;
+        animation-iteration-count: infinite;
         left: $left;
         opacity: $opacity;
         top: -$top;
@@ -52,6 +52,9 @@ $MAX_METEORS: 15;
             left: $left;
             opacity: $opacity;
             top: -$top;
+        }
+        40% {
+            opacity: .05;
         }
         55% {
             opacity: 0;
