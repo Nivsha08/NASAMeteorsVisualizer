@@ -13,6 +13,8 @@ interface QueryManagerProps {
     searcher: MeteorsSearcher;
     updateSearcher: (newSearcher: MeteorsSearcher) => void;
     queryKey: number;
+    toggleDetails: () => void;
+    detailsVisible: boolean;
     onQuery: () => void;
 }
 
@@ -85,7 +87,7 @@ const QueryManager = (props: QueryManagerProps) => {
     };
 
     return (
-        <>
+        <div className="query-manager-wrapper">
             <YearSelector value={year} setValue={setYear}
                           minYear={props.searcher.minYear}
                           maxYear={props.searcher.maxYear}/>
@@ -99,10 +101,13 @@ const QueryManager = (props: QueryManagerProps) => {
             </div>
             {
                 summaryVisible ?
-                    <ResultSummary meteors={props.searcher.result} key={props.queryKey}/>
+                    <ResultSummary meteors={props.searcher.result}
+                                   detailsVisible={props.detailsVisible}
+                                   toggleDetails={props.toggleDetails}
+                                   key={props.queryKey}/>
                     : null
             }
-        </>
+        </div>
     )
 };
 

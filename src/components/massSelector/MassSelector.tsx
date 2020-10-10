@@ -17,7 +17,7 @@ const MassSelector = (props: MassSelectorProps) => {
 
     return (
         <div className="mass-selector-wrapper">
-            <span className={"instruction"}>Go on and choose a minimal meteor mass, max mass: {props.maxMass}</span>
+            <span className={"instruction"}>Go on and choose a minimal meteor mass</span>
             <div className="input-wrapper">
                 <InputNumber className={"mass-input"}
                              value={props.value}

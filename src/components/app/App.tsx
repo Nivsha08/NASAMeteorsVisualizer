@@ -13,6 +13,7 @@ const App = () => {
     const [dataset, setDataset] = useState<MeteorProperties[]>([]);
     const [searcher, setSearcher] = useState<MeteorsSearcher | null>(null);
     const [queryKey, setQueryKey] = useState<number>(0);
+    const [detailsView, showDetails] = useState<boolean>(false);
 
     useEffect(() => {
         const setApplicationDataset = async () => {
@@ -27,20 +28,33 @@ const App = () => {
         setQueryKey(queryKey + 1);
     };
 
+    const toggleDetailsView = () => {
+        showDetails(!detailsView);
+    };
+
     return (
         <div className="app">
-            <Header title="MeteorsQuerist"
-                    subtitle="meteors are falling as we speak"/>
+            <div className="header-row">
+                <Header title="MeteorsQuerist"
+                        subtitle="meteors are falling as we speak"/>
+            </div>
             {
                 searcher ?
-                    <>
+                    <div className="query-row">
                         <QueryManager dataset={dataset}
                                       searcher={searcher as MeteorsSearcher}
                                       updateSearcher={setSearcher}
                                       onQuery={updateQueryKey}
+                                      detailsVisible={detailsView}
+                                      toggleDetails={toggleDetailsView}
                                       queryKey={queryKey}/>
-                        <FallingMeteors />
-                    </>
+                        {
+                                <div className={`map-wrapper ${detailsView ? "visible" : "dismissed"}`}>
+                                    {/*<span style={{color: "white"}}>map view!</span>*/}
+                                </div>
+                        }
+                        <FallingMeteors/>
+                    </div>
                     : null
             }
         </div>

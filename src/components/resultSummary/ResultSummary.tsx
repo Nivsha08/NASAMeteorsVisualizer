@@ -2,10 +2,12 @@ import React from "react";
 import Meteor from "../../models/Meteor";
 import "./ResultSummary.scss";
 import {Button} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined, MinusOutlined} from "@ant-design/icons";
 
 interface ResultSummaryProps {
     meteors: Meteor[];
+    detailsVisible: boolean;
+    toggleDetails: () => void;
 }
 
 const ResultSummary = (props: ResultSummaryProps) => {
@@ -16,7 +18,9 @@ const ResultSummary = (props: ResultSummaryProps) => {
             <span className="bottom-summary">meteors fit the criteria</span>
             {
                 (props.meteors.length > 0) ?
-                    <Button className="details-button" type={"link"}>details <PlusOutlined /></Button>
+                    <Button onClick={props.toggleDetails} className="details-button" type={"link"}>
+                        details {props.detailsVisible ? <MinusOutlined /> : <PlusOutlined />}
+                    </Button>
                     : null
             }
         </div>
