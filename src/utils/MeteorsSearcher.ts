@@ -56,8 +56,8 @@ class MeteorsSearcher {
     }
 
     get result(): Meteor[] { return this.meteors; }
-    get minYear(): number { return ArrayUtils.findMin(this.meteors.map(m => m.year as number)); }
-    get maxYear(): number { return ArrayUtils.findMax(this.meteors.map(m => m.year as number)); }
+    get minYear(): number { return ArrayUtils.findMin(this.initialMeteors.map(m => m.year as number)); }
+    get maxYear(): number { return ArrayUtils.findMax(this.initialMeteors.map(m => m.year as number)); }
 }
 
 export default MeteorsSearcher;

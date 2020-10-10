@@ -25,10 +25,8 @@ const YearSelector = (props: YearSelectorProps) => {
     };
 
     const handleValue = (value: string): void => {
-        if (value)
-            props.setValue(Number.parseInt(value));
-        else
-            props.setValue(props.minYear);
+        if (value) props.setValue(Number.parseInt(value));
+        else props.setValue(props.minYear);
     };
 
     return (
@@ -38,7 +36,8 @@ const YearSelector = (props: YearSelectorProps) => {
                     min={props.minYear}
                     max={props.maxYear}
                     marks={sliderMarks}
-                    onChange={(e: number) => props.setValue(e)}/>
+                    onChange={(e: number) => props.setValue(e)}
+                    onAfterChange={props.onProceed}/>
             <div className="input-wrapper">
                 <Input className="year-input"
                        type={"number"}

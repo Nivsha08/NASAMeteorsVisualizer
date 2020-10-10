@@ -1,0 +1,6 @@
+@import "../../styles/colors";
+
+.amount-summary {
+    color: get-color-weight($primary, 400);
+    font-size: 4rem;
+}
