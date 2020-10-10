@@ -1,5 +1,13 @@
 @import "../../styles/colors";
 
+.notification {
+    background-color: transparentize(get-color-weight($primary, 500), .5);
+    div[class$="-message"] {
+        font-size: .95rem;
+        color: $white;
+    }
+}
+
 .buttons-wrapper {
     padding: .5rem 0;
     width: 30%;
