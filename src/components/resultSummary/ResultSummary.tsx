@@ -9,10 +9,10 @@ interface ResultSummaryProps {
 const ResultSummary = (props: ResultSummaryProps) => {
 
     return (
-        <>
+        <div className="result-summary">
             <div className="amount-summary">{props.meteors.length}</div>
             <span className="bottom-summary">meteors fit the criteria</span>
-        </>
+        </div>
 
     );
 };

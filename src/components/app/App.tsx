@@ -27,8 +27,6 @@ const App = () => {
         setQueryKey(queryKey + 1);
     };
 
-    console.log(searcher)
-
     return (
         <div className="app">
             <Header title="MeteorsQuerist"

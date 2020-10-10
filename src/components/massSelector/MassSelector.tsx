@@ -6,7 +6,6 @@ interface MassSelectorProps {
     value: number;
     setValue: (value: number) => void;
     maxMass: number;
-    onProceed: () => void;
 }
 
 const MassSelector = (props: MassSelectorProps) => {

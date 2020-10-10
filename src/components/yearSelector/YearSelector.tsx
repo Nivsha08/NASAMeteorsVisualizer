@@ -7,7 +7,6 @@ interface YearSelectorProps {
     setValue: (value: number) => void;
     minYear: number;
     maxYear: number;
-    onProceed: () => void;
 }
 
 const style = {color: "#ffffff", opacity: .5};
@@ -36,8 +35,7 @@ const YearSelector = (props: YearSelectorProps) => {
                     max={props.maxYear}
                     tooltipVisible={false}
                     marks={sliderMarks}
-                    onChange={(e: number) => props.setValue(e)}
-                    onAfterChange={props.onProceed}/>
+                    onChange={(e: number) => props.setValue(e)} />
             <div className="input-wrapper">
                 <InputNumber className="year-input"
                              size={"large"}

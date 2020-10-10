@@ -26,6 +26,7 @@ const QueryManager = (props: QueryManagerProps) => {
 
     const [year, setYear] = useState<number>(0);
     const [mass, setMass] = useState<number>(0);
+    const [summaryVisible, showSummary] = useState<boolean>(false);
     const [message, setMessage] = useState<MessageProps>({visible: false});
 
     const MAX_MASS_MSG = `There's no meteor with mass larger than ${props.searcher.maxMass} - just try a smaller number!`;
@@ -76,6 +77,7 @@ const QueryManager = (props: QueryManagerProps) => {
         props.searcher.reset();
         props.searcher.filterByYear(year).filterByMinimalMass(mass);
         validateQueryResults();
+        showSummary(true);
         props.onQuery();
     };
 
@@ -84,25 +86,28 @@ const QueryManager = (props: QueryManagerProps) => {
         props.searcher.reset();
         setYear(0);
         setMass(0);
+        showSummary(false);
         props.onQuery();
     };
 
     return (
         <>
             <YearSelector value={year} setValue={setYear}
-                          onProceed={updateQuery}
                           minYear={props.searcher.minYear}
                           maxYear={props.searcher.maxYear}/>
             <MassSelector value={mass} setValue={setMass}
-                          maxMass={props.searcher.maxMass}
-                          onProceed={updateQuery}/>
+                          maxMass={props.searcher.maxMass}/>
             <div className="buttons-wrapper">
                 <Button className="reset-button" size={"large"} type={"ghost"}
                         onClick={resetQuery}>Reset</Button>
                 <Button className="apply-button" size={"large"} type={"ghost"}
                         onClick={updateQuery}>Apply query</Button>
             </div>
-            <ResultSummary meteors={props.searcher.result} key={props.queryKey}/>
+            {
+                summaryVisible ?
+                    <ResultSummary meteors={props.searcher.result} key={props.queryKey}/>
+                    : null
+            }
             <PromptMessage visible={message.visible}
                            message={message.text}
                            type={message.type}
