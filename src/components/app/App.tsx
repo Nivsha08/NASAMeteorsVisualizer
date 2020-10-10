@@ -5,12 +5,14 @@ import {Header} from "../header";
 import {QueryManager} from "../queryManager";
 import {MeteorProperties} from "../../types/meteors";
 import MeteorsSearcher from "../../utils/MeteorsSearcher";
+import {FallingMeteors} from "../fallingMeteors";
 
 const fetchDataset = async () => mockDataset;
 
 const App = () => {
     const [dataset, setDataset] = useState<MeteorProperties[]>([]);
     const [searcher, setSearcher] = useState<MeteorsSearcher | null>(null);
+    const [queryKey, setQueryKey] = useState<number>(0);
 
     useEffect(() => {
         const setApplicationDataset = async () => {
@@ -21,15 +23,27 @@ const App = () => {
         setApplicationDataset();
     }, []);
 
+    const updateQueryKey = () => {
+        setQueryKey(queryKey + 1);
+    };
+
     return (
         <div className="app">
             <Header title="MeteorsQuerist"
-                    subtitle="meteors are falling as we speak" />
-            {searcher ?
-                <QueryManager dataset={dataset}
-                              searcher={searcher as MeteorsSearcher}
-                              updateSearcher={setSearcher}  />
-                : null}
+                    subtitle="meteors are falling as we speak"/>
+            {
+                searcher ?
+                    <>
+                        <QueryManager dataset={dataset}
+                                      searcher={searcher as MeteorsSearcher}
+                                      updateSearcher={setSearcher}
+                                      onQuery={updateQueryKey}
+                                      queryKey={queryKey}/>
+                        <FallingMeteors meteors={searcher.result}
+                                        key={queryKey}/>
+                    </>
+                    : null
+            }
         </div>
     );
 };

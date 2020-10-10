@@ -9,11 +9,12 @@ interface QueryManagerProps {
     dataset: MeteorProperties[];
     searcher: MeteorsSearcher;
     updateSearcher: (newSearcher: MeteorsSearcher) => void;
+    queryKey: number;
+    onQuery: () => void;
 }
 
 const QueryManager = (props: QueryManagerProps) => {
 
-    const [queryKey, setQueryKey] = useState<number>(0);
     const [year, setYear] = useState<number>(1000);
     const [mass, setMass] = useState<number>(0);
 
@@ -21,7 +22,7 @@ const QueryManager = (props: QueryManagerProps) => {
         props.searcher.reset();
         props.searcher.filterByYear(year).filterByMinimalMass(mass);
         console.log("filter by ", `year: ${year}`, `mass: ${mass}`, `result:`, props.searcher.result);
-        setQueryKey(queryKey + 1);
+        props.onQuery();
     };
 
     return (
@@ -32,7 +33,7 @@ const QueryManager = (props: QueryManagerProps) => {
                           maxYear={props.searcher.maxYear} />
             <MassSelector value={mass} setValue={setMass}
                           onProceed={updateQuery} />
-            <ResultSummary meteors={props.searcher.result} key={queryKey} />
+            <ResultSummary meteors={props.searcher.result} key={props.queryKey} />
         </>
     )
 };
