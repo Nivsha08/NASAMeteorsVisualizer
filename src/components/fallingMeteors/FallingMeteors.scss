@@ -9,7 +9,6 @@ $MAX_METEORS: 100;
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: get-color-weight($primary, 700);
 }
 
 .meteor {
@@ -42,7 +41,7 @@ $MAX_METEORS: 100;
         animation-name: meteor-#{$i}-animation;
         animation-delay: $delay;
         animation-duration: random(6) + 4s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: 3;
         left: $left;
         opacity: $opacity;
         top: -$top;

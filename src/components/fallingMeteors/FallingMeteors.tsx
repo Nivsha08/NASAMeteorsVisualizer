@@ -1,17 +1,17 @@
 import React from "react";
 import "./FallingMeteors.scss";
-import Meteor from "../../models/Meteor";
 
 interface FallingMeteorsProps {
-    meteors: Meteor[];
+    amount: number;
 }
 
 const FallingMeteors = (props: FallingMeteorsProps) => {
-
+    const multiplyFactor = 3;
+    const indicesArray = Array.from({length: props.amount * multiplyFactor}, (_, i) => i);
     return (
         <div className="falling-meteors-wrapper">
             {
-                props.meteors.map((m: Meteor, i: number) => (
+                indicesArray.map((i: number) => (
                     <i className={`meteor meteor-${i}`} key={i} />
                 ))
             }

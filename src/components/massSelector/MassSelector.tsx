@@ -1,7 +1,6 @@
 import React from "react";
 import "./MassSelector.scss";
 import {Button, InputNumber} from "antd";
-import {ArrowRightOutlined} from "@ant-design/icons";
 
 interface MassSelectorProps {
     value: number;
@@ -31,7 +30,7 @@ const MassSelector = (props: MassSelectorProps) => {
                         type={"text"}
                         size={"large"}
                         onClick={props.onProceed}>
-                    {<ArrowRightOutlined/>}
+                    Apply
                 </Button>
             </div>
         </div>

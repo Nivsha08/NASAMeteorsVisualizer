@@ -1,7 +1,6 @@
 import React from "react";
 import "./YearSelector.scss";
 import {Button, InputNumber, Slider} from "antd";
-import {ArrowRightOutlined} from "@ant-design/icons"
 
 interface YearSelectorProps {
     value: number;
@@ -52,7 +51,7 @@ const YearSelector = (props: YearSelectorProps) => {
                         type={"text"}
                         size={"large"}
                         onClick={props.onProceed}>
-                    {<ArrowRightOutlined/>}
+                    Apply
                 </Button>
             </div>
         </div>
