@@ -18,9 +18,9 @@ const QueryManager = (props: QueryManagerProps) => {
     const [mass, setMass] = useState<number>(0);
 
     const updateQuery = (): void => {
-        console.log("filter by ", `year: ${year}`, `mass: ${mass}`);
         props.searcher.reset();
         props.searcher.filterByYear(year).filterByMinimalMass(mass);
+        console.log("filter by ", `year: ${year}`, `mass: ${mass}`, `result:`, props.searcher.result);
         setQueryKey(queryKey + 1);
     };
 

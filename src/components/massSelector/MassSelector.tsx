@@ -26,7 +26,7 @@ const MassSelector = (props: MassSelectorProps) => {
                              placeholder={"CHOOSE MINIMAL MASS"}
                              size={"large"}
                              onChange={e => handleValue(e as number)}
-                             onPressEnter={props.onProceed} />
+                             onPressEnter={props.onProceed}/>
                 <Button className="proceed-button"
                         type={"text"}
                         size={"large"}

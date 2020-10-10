@@ -34,7 +34,7 @@ class Meteor {
     }
 
     isValid(): boolean {
-        return (this.knownLocation() && this.knownYear() && this.knownMass());
+        return (this.knownYear() && this.knownMass());
     }
 
     private parseYear(date: string): number {

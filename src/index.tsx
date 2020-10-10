@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "./index.scss";
+import "animate.css";
 import {App} from "./components/app";
 import * as serviceWorker from "./serviceWorker";
 
