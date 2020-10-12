@@ -1,17 +1,32 @@
 import {MeteorProperties} from "../types/meteors";
-import Meteor from "../models/Meteor";
-import ArrayUtils from "./ArrayUtils";
+import Meteor from "./Meteor";
+import ArrayUtils from "../utils/ArrayUtils";
+import QueryError, {MaxMassExceeded, NoMeteorsInThisYear} from "./QueryError";
+
+interface QueryFilters {
+    year: number;
+    mass: number;
+}
+
+interface QueryResult {
+    year: number;
+    minimalMass: number;
+    meteors: Meteor[];
+}
 
 class MeteorsSearcher {
 
     private readonly initialMeteors: Meteor[];
+    private filters: QueryFilters;
     private meteors: Meteor[];
+    error: QueryError | null = null;
 
     constructor(data: MeteorProperties[] | Meteor[]) {
         const parsedData: Meteor[] = this.parseData(data);
         const validMeteors: Meteor[] = this.removeInvalidMeteors(parsedData);
         this.initialMeteors = ArrayUtils.sortBy(validMeteors, "year");
         this.meteors = ArrayUtils.clone(this.initialMeteors);
+        this.filters = this.getInitialFilters();
     }
 
     private parseData(data: MeteorProperties[] | Meteor[]): Meteor[] {
@@ -29,36 +44,48 @@ class MeteorsSearcher {
         return data.filter((m: Meteor) => m.isValid());
     }
 
+    private getInitialFilters(): QueryFilters {
+        return {year: this.minYear, mass: 0};
+    }
+
     filterByYear(year: string | number): MeteorsSearcher {
-        const requiredYear: number =
-            (typeof year === "string") ? Number.parseInt(year) : year;
+        this.filters.year = (typeof year === "string") ? Number.parseInt(year) : year;
         this.meteors = this.meteors
             .filter((m: Meteor) => m.knownYear())
-            .filter((m: Meteor) => m.year as number === requiredYear);
+            .filter((m: Meteor) => m.year as number === this.filters.year);
+        if (this.meteors.length === 0) {
+            this.error = new NoMeteorsInThisYear(this.filters.year);
+        }
         return this;
     }
 
     filterByMinimalMass(mass: string | number): MeteorsSearcher {
-        const requiredMass: number =
-            (typeof mass === "string") ? Number.parseInt(mass) : mass;
+        this.filters.mass = (typeof mass === "string") ? Number.parseInt(mass) : mass;
         this.meteors = this.meteors
             .filter((m: Meteor) => m.knownMass())
-            .filter((m: Meteor) => m.mass as number > requiredMass);
+            .filter((m: Meteor) => m.mass as number > this.filters.mass);
+        if (this.filters.mass >= this.maxMass) {
+            this.error = new MaxMassExceeded(this.maxMass);
+        }
         return this;
     }
 
-    // todo: implement no-results-fallback logic
+    // findBestFitSecondaryResults(minimalMass: string, year: string | number): QueryResult {
+    //
+    // }
 
     reset(): void {
         this.meteors = ArrayUtils.clone(this.initialMeteors);
+        this.filters = this.getInitialFilters();
+        this.error = null;
     }
 
-    get result(): Meteor[] {
-        return this.meteors;
+    get result(): QueryResult {
+        return {year: this.filters.year, minimalMass: this.filters.mass, meteors: this.meteors};
     }
 
     get emptyResult(): boolean {
-        return (this.result.length === 0);
+        return (this.result.meteors.length === 0);
     }
 
     get minYear(): number {
@@ -72,6 +99,7 @@ class MeteorsSearcher {
     get maxMass(): number {
         return ArrayUtils.findMax(this.initialMeteors.map(m => Number.parseInt(m.mass as string)));
     }
+
 }
 
 export default MeteorsSearcher;

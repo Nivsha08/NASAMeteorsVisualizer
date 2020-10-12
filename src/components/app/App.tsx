@@ -4,7 +4,7 @@ import mockDataset from "../../assets/meteors.json";
 import {Header} from "../header";
 import {QueryManager} from "../queryManager";
 import {MeteorProperties} from "../../types/meteors";
-import MeteorsSearcher from "../../utils/MeteorsSearcher";
+import MeteorsSearcher from "../../models/MeteorsSearcher";
 import {FallingMeteors} from "../fallingMeteors";
 import {Map} from "../map";
 
@@ -49,7 +49,6 @@ const App = () => {
                                       detailsVisible={detailsView}
                                       toggleDetails={toggleDetailsView}
                                       queryKey={queryKey}/>
-                        <Map expanded={detailsView} />
                         <FallingMeteors/>
                     </div>
                     : null

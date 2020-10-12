@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import "./QueryManager.scss";
 import {MeteorProperties} from "../../types/meteors";
-import MeteorsSearcher from "../../utils/MeteorsSearcher";
+import MeteorsSearcher from "../../models/MeteorsSearcher";
 import {YearSelector} from "../yearSelector";
 import {ResultSummary} from "../resultSummary";
 import {MassSelector} from "../massSelector";
 import {Button, notification} from "antd";
-import {getMessage} from "../../constants/messages";
 
 interface QueryManagerProps {
     dataset: MeteorProperties[];
@@ -27,7 +26,7 @@ enum NotificationTypes {
 
 const QueryManager = (props: QueryManagerProps) => {
 
-    const [year, setYear] = useState<number>(0);
+    const [year, setYear] = useState<number>(props.searcher.minYear);
     const [mass, setMass] = useState<number>(0);
     const [summaryVisible, showSummary] = useState<boolean>(false);
 
@@ -35,47 +34,14 @@ const QueryManager = (props: QueryManagerProps) => {
         notification[type]({message, placement: "bottomLeft", className: "notification"})
     };
 
-    const checkForMaxMass = (): boolean => {
-        if (mass >= props.searcher.maxMass) {
-            notify(getMessage.MAX_MASS(props.searcher.maxMass), NotificationTypes.WARNING);
-            return true;
-        }
-        return false;
-    };
-
-    const checkForEmptyYear = (): boolean => {
-        if (props.searcher.emptyResult && mass === 0) {
-            notify(getMessage.EMPTY_YEAR(), NotificationTypes.INFO);
-            return true;
-        }
-        return false;
-    };
-
-    const checkForNoResults = (): boolean => {
-        if (props.searcher.emptyResult) {
-            notify(getMessage.NO_RESULTS(), NotificationTypes.INFO);
-            return true;
-        }
-        return false;
-    };
-
-    const validateQueryResults = (): boolean => {
-        if (checkForEmptyYear()) return false;
-        else if (checkForMaxMass()) return false;
-        else if (checkForNoResults()) {
-            // todo: trigger fallback logic
-            console.log("jump to first year!");
-            return false;
-        }
-        return true;
-    };
-
     const updateQuery = (): void => {
         props.searcher.reset();
         props.searcher.filterByYear(year).filterByMinimalMass(mass);
-        validateQueryResults();
         showSummary(true);
         props.onQuery();
+        if (props.searcher.error) {
+            notify(props.searcher.error.message, NotificationTypes.INFO);
+        }
     };
 
     const resetQuery = (): void => {
@@ -97,11 +63,11 @@ const QueryManager = (props: QueryManagerProps) => {
                 <Button className="apply-button" size={"large"} type={"ghost"}
                         onClick={updateQuery}>Apply query</Button>
                 <Button className="reset-button" size={"large"} type={"ghost"}
-                    onClick={resetQuery}>Reset</Button>
+                        onClick={resetQuery}>Reset</Button>
             </div>
             {
                 summaryVisible ?
-                    <ResultSummary meteors={props.searcher.result}
+                    <ResultSummary meteors={props.searcher.result.meteors}
                                    detailsVisible={props.detailsVisible}
                                    toggleDetails={props.toggleDetails}
                                    key={props.queryKey}/>
