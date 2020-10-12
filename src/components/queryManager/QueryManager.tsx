@@ -6,6 +6,7 @@ import {YearSelector} from "../yearSelector";
 import {ResultSummary} from "../resultSummary";
 import {MassSelector} from "../massSelector";
 import {Button, notification} from "antd";
+import QueryError from "../../models/QueryError";
 
 interface QueryManagerProps {
     dataset: MeteorProperties[];
@@ -14,7 +15,7 @@ interface QueryManagerProps {
     queryKey: number;
     toggleDetails: () => void;
     detailsVisible: boolean;
-    onQuery: () => void;
+    updateQueryKey: () => void;
 }
 
 enum NotificationTypes {
@@ -23,6 +24,10 @@ enum NotificationTypes {
     INFO = "info",
     ERROR = "error"
 }
+
+const getNoResultsMsg = (year: number) => (
+    `The mass was not found, jumping to first-year where there is a mass that fits the criteria - ${year}`
+);
 
 const QueryManager = (props: QueryManagerProps) => {
 
@@ -37,10 +42,19 @@ const QueryManager = (props: QueryManagerProps) => {
     const updateQuery = (): void => {
         props.searcher.reset();
         props.searcher.filterByYear(year).filterByMinimalMass(mass);
+        analyzeQueryResults();
+        props.updateQueryKey();
         showSummary(true);
-        props.onQuery();
+    };
+
+    const analyzeQueryResults = (): void => {
         if (props.searcher.error) {
-            notify(props.searcher.error.message, NotificationTypes.INFO);
+            notify((props.searcher.error as QueryError).message, NotificationTypes.INFO);
+        }
+        else if (props.searcher.emptyResult) {
+            const closestYear: number = props.searcher.findBestResultsYear(mass, year);
+            setYear(closestYear);
+            notify(getNoResultsMsg(closestYear), NotificationTypes.INFO);
         }
     };
 
@@ -49,7 +63,7 @@ const QueryManager = (props: QueryManagerProps) => {
         setYear(0);
         setMass(0);
         showSummary(false);
-        props.onQuery();
+        props.updateQueryKey();
     };
 
     return (

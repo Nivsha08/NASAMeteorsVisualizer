@@ -45,7 +45,7 @@ const App = () => {
                         <QueryManager dataset={dataset}
                                       searcher={searcher as MeteorsSearcher}
                                       updateSearcher={setSearcher}
-                                      onQuery={updateQueryKey}
+                                      updateQueryKey={updateQueryKey}
                                       detailsVisible={detailsView}
                                       toggleDetails={toggleDetailsView}
                                       queryKey={queryKey}/>

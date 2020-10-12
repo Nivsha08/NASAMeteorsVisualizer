@@ -52,7 +52,7 @@ class MeteorsSearcher {
         this.filters.year = (typeof year === "string") ? Number.parseInt(year) : year;
         this.meteors = this.meteors
             .filter((m: Meteor) => m.knownYear())
-            .filter((m: Meteor) => m.year as number === this.filters.year);
+            .filter((m: Meteor) => (m.year as number) === this.filters.year);
         if (this.meteors.length === 0) {
             this.error = new NoMeteorsInThisYear(this.filters.year);
         }
@@ -63,16 +63,27 @@ class MeteorsSearcher {
         this.filters.mass = (typeof mass === "string") ? Number.parseInt(mass) : mass;
         this.meteors = this.meteors
             .filter((m: Meteor) => m.knownMass())
-            .filter((m: Meteor) => m.mass as number > this.filters.mass);
+            .filter((m: Meteor) => (m.mass as number) > this.filters.mass);
         if (this.filters.mass >= this.maxMass) {
             this.error = new MaxMassExceeded(this.maxMass);
         }
         return this;
     }
 
-    // findBestFitSecondaryResults(minimalMass: string, year: string | number): QueryResult {
-    //
-    // }
+    findBestResultsYear(minimalMass: number, year: number): number {
+        this.reset();
+        // todo: handle year == minYear
+        const sufficeMassMeteors: Meteor[] = this.filterByMinimalMass(minimalMass).result.meteors;
+        const maxYear: number = ArrayUtils.findMax(
+            sufficeMassMeteors
+                .filter((m: Meteor) => (m.year as number) < year)
+                .map((m: Meteor) => m.year as number)
+        );
+        this.filters.year = maxYear;
+        this.meteors = sufficeMassMeteors.filter(
+            (m: Meteor) => (m.year as number) === maxYear);
+        return maxYear;
+    }
 
     reset(): void {
         this.meteors = ArrayUtils.clone(this.initialMeteors);
