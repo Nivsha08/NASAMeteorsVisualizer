@@ -72,7 +72,6 @@ class MeteorsSearcher {
 
     findBestResultsYear(minimalMass: number, year: number): number {
         this.reset();
-        // todo: handle year == minYear
         const sufficeMassMeteors: Meteor[] = this.filterByMinimalMass(minimalMass).result.meteors;
         const maxYear: number = ArrayUtils.findMax(
             sufficeMassMeteors

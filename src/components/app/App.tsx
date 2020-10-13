@@ -15,6 +15,7 @@ const App = () => {
     const [searcher, setSearcher] = useState<MeteorsSearcher | null>(null);
     const [queryKey, setQueryKey] = useState<number>(0);
     const [detailsView, showDetails] = useState<boolean>(false);
+    const [mapExpanded, setMapExpansion] = useState<boolean>(false);
 
     useEffect(() => {
         const setApplicationDataset = async () => {
@@ -31,6 +32,7 @@ const App = () => {
 
     const toggleDetailsView = () => {
         showDetails(!detailsView);
+        setMapExpansion(!mapExpanded);
     };
 
     return (
@@ -49,6 +51,9 @@ const App = () => {
                                       detailsVisible={detailsView}
                                       toggleDetails={toggleDetailsView}
                                       queryKey={queryKey}/>
+                        <Map expanded={mapExpanded}
+                             closeMap={toggleDetailsView}
+                             meteors={searcher.result.meteors} />
                         <FallingMeteors/>
                     </div>
                     : null

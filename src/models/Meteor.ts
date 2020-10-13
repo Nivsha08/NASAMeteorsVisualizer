@@ -1,4 +1,4 @@
-import {MeteorLocation, MeteorMetadata, MeteorProperties, Recognizer} from "../types/meteors";
+import {Coordinate, MeteorLocation, MeteorMetadata, MeteorProperties, Recognizer} from "../types/meteors";
 import DateUtils from "../utils/DateUtils";
 
 class Meteor {
@@ -34,7 +34,7 @@ class Meteor {
     }
 
     isValid(): boolean {
-        return (this.knownYear() && this.knownMass());
+        return (this.knownLocation() && this.knownYear() && this.knownMass());
     }
 
     private parseYear(date: string): number {
