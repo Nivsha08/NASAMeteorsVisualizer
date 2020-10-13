@@ -1,4 +1,4 @@
-import {Coordinate, MeteorLocation, MeteorMetadata, MeteorProperties, Recognizer} from "../types/meteors";
+import {MeteorLocation, MeteorMetadata, MeteorProperties, Recognizer} from "../types/meteors";
 import DateUtils from "../utils/DateUtils";
 
 class Meteor {
