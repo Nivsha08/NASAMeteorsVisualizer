@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/NASAMeteorsVisualizer/static/css/main.3686bf20.chunk.css",
+    "main.js": "/NASAMeteorsVisualizer/static/js/main.729b982a.chunk.js",
+    "main.js.map": "/NASAMeteorsVisualizer/static/js/main.729b982a.chunk.js.map",
+    "runtime-main.js": "/NASAMeteorsVisualizer/static/js/runtime-main.bcff08fe.js",
+    "runtime-main.js.map": "/NASAMeteorsVisualizer/static/js/runtime-main.bcff08fe.js.map",
+    "static/css/2.375dbf40.chunk.css": "/NASAMeteorsVisualizer/static/css/2.375dbf40.chunk.css",
+    "static/js/2.0b04b434.chunk.js": "/NASAMeteorsVisualizer/static/js/2.0b04b434.chunk.js",
+    "static/js/2.0b04b434.chunk.js.map": "/NASAMeteorsVisualizer/static/js/2.0b04b434.chunk.js.map",
+    "index.html": "/NASAMeteorsVisualizer/index.html",
+    "precache-manifest.0abf2c200d603a15c8356e7f49751aa1.js": "/NASAMeteorsVisualizer/precache-manifest.0abf2c200d603a15c8356e7f49751aa1.js",
+    "service-worker.js": "/NASAMeteorsVisualizer/service-worker.js",
+    "static/css/2.375dbf40.chunk.css.map": "/NASAMeteorsVisualizer/static/css/2.375dbf40.chunk.css.map",
+    "static/css/main.3686bf20.chunk.css.map": "/NASAMeteorsVisualizer/static/css/main.3686bf20.chunk.css.map",
+    "static/js/2.0b04b434.chunk.js.LICENSE.txt": "/NASAMeteorsVisualizer/static/js/2.0b04b434.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bcff08fe.js",
+    "static/css/2.375dbf40.chunk.css",
+    "static/js/2.0b04b434.chunk.js",
+    "static/css/main.3686bf20.chunk.css",
+    "static/js/main.729b982a.chunk.js"
+  ]
+}
